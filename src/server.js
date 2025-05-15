@@ -28,5 +28,3 @@ database.sync( { force: false })
   .catch((error) => {
     console.error('Error syncing database:', error);
   });
-
-
