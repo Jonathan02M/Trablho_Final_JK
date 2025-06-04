@@ -83,7 +83,7 @@ O sistema oferece suporte a diversas funcionalidades, organizadas em módulos.
 * Produto N:1 Categoria
 * Pedido N:N Produtos
 
-## Usuário (/user)
+## Usuário (/user) R=OK!!!!!!!!!
 
 * id: number
 * name: string

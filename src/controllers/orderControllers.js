@@ -19,5 +19,6 @@ class OrderController {
       product_id: newOrder.product_id,
     };
   }
+  
 }
 module.exports = new OrderController();

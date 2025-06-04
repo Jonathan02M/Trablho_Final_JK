@@ -2,7 +2,7 @@ const express = require('express');
  const userRouter = require('./router/user');
 const productRouter = require('./router/product');
 const categoryRouter = require('./router/category');
-// const orderRouter = require('./router/order');
+const orderRouter = require('./router/order');
 const database = require('./config/database');
  
 console.log('Starting server...');
@@ -15,14 +15,14 @@ app.get('/', (req, res) => {
 
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
-// app.use('/api/order', orderRouter);
+app.use('/api/order', orderRouter);
 app.use('/api/category', categoryRouter);
 
 database.sync( { force: false })
   .then(() => {
     console.log('Database synced');
-    app.listen(3000, () => {
-      console.log('Server is running on port 3000');
+    app.listen(3001, () => {
+      console.log('Server is running on port 3001');
     });
   })
   .catch((error) => {

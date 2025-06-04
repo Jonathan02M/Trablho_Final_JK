@@ -15,5 +15,6 @@ class CategoryController {
       name: newCategory.name,
     };
   }
+  
 }
 module.exports = new CategoryController();
