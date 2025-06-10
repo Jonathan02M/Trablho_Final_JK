@@ -1,11 +1,12 @@
 const controller = require('../controllers/categoryControllers');
+const category = require('../models/category');
 
 class categoryApi {
     async criarCategory(req, res) {
-        const  nome = req.body.nome;
+        const  name = req.body.name;
 
         try {
-            const category = await controller.criarCategory(nome, descricao);
+            const category = await controller.criarCategory(name);
             res.status(201).json(category);
         } catch (error) {
             console.error('Error creating category:', error);
@@ -35,10 +36,10 @@ class categoryApi {
 
     async atualizarCategory(req, res) {
         const { id } = req.params;
-        const { nome, descricao } = req.body;
+        const { name } = req.body;
 
         try {
-            const category = await controller.atualizarCategory(id, nome, descricao);
+            const category = await controller.atualizarCategory(id, name);
             return res.status(200).send(category);
         } catch (error) {
             return res.status(400).send({ error: error.message });

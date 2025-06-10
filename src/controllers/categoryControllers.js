@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const category = require("../models/category");
 
 class CategoryController {
-  async createCategory(name) {
+  async criarCategory(name) {
     if (name === undefined) {
       throw new Error("Preencha todos os campos obrigatórios");
     }
@@ -14,6 +14,37 @@ class CategoryController {
       id: newCategory.id,
       name: newCategory.name,
     };
+  }
+
+  async listCategories() {
+    return category.findAll();
+  }
+
+  async deleteCategory(id) {
+    if (id === undefined) {
+      throw new Error("Preencha o campo obrigatório");
+    }
+    const categoryToDelete = await category.findByPk(id);
+    if (!categoryToDelete) {
+      throw new Error("Categoria não encontrada");
+    }
+    await category.destroy({ where: { id } });
+    return { message: "Categoria deletada com sucesso" };
+  }
+
+  async atualizarCategory(id, name) {
+    if (id === undefined || name === undefined) {
+      throw new Error("Preencha todos os campos obrigatórios");
+    }
+    const categoryToUpdate = await category.findByPk(id);
+    if (!categoryToUpdate) {
+      throw new Error("Categoria não encontrada");
+    }
+    await category.update(
+      { name },
+      { where: { id } }
+    );
+    return { message: "Categoria atualizada com sucesso" };
   }
   
 }

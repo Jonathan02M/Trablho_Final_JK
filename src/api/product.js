@@ -1,12 +1,14 @@
 const controller = require('../controllers/productControllers');
+const product = require('../models/product');
 
 class productApi {
     async criarproduct(req, res) {
         const  name = req.body.name;
         const  price = req.body.price;
+        const  category_id = req.body.category_id;
 
         try {
-            const product = await controller.criarproduct(name, price);
+            const product = await controller.criarproduct(name, price, category_id);
             res.status(201).json(product);
         } catch (error) {
             console.error('Error creating product:', error);
