@@ -1,6 +1,7 @@
 const { or } = require('sequelize');
 const database = require('../config/database');
 
+
 class OrderProduct {
   constructor() {
     this.model = database.define('orderProduct', {
