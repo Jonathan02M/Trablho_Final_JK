@@ -6,6 +6,11 @@ const orderRouter = require('./router/order');
 const database = require('./config/database');
 const orderProduct = require('./router/orderProduct');
 
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./docs/swegger.yml');
+
+
  
 console.log('Starting server...');
 const app = express();
@@ -20,6 +25,9 @@ app.use('/api/product', productRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/orderProduct', orderProduct);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//http://localhost:3001/api-docs/
 
 
 database.sync( { force: false })

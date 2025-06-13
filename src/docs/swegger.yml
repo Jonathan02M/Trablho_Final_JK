@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  title: API de Gerenciamento de Projetos
+  description: Documentação da API de usuários, projetos e tarefas com autenticação JWT.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+    description: Servidor local
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+    Projeto:
+      type: object
+      properties:
+        id:
+          type: integer
+        titulo:
+          type: string
+        descricao:
+          type: string
+        usuarioId:
+          type: integer
+    Tarefa:
+      type: object
+      properties:
+        id:
+          type: integer
+        titulo:
+          type: string
+        status:
+          type: string
+        projetoId:
+          type: integer
+security:
+  - bearerAuth: []
+paths:
+  /api/user:
+    get:
+      summary: Listar usuários
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de usuários
+    post:
+      summary: Criar usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Usuário criado
+
+  /api/user/login:
+    post:
+      summary: Login de usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        '200':
+          description: Token JWT retornado
+
+  /projetos:
+    get:
+      summary: Listar projetos
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de projetos
+    post:
+      summary: Criar projeto
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Projeto'
+      responses:
+        '201':
+          description: Projeto criado
+
+  /projetos/{id}:
+    put:
+      summary: Atualizar projeto
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Projeto'
+      responses:
+        '200':
+          description: Projeto atualizado
+    delete:
+      summary: Deletar projeto
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Projeto deletado
+
+  /tarefas:
+    get:
+      summary: Listar tarefas
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de tarefas
+    post:
+      summary: Criar tarefa
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tarefa'
+      responses:
+        '201':
+          description: Tarefa criada
+
+  /tarefas/{id}:
+    put:
+      summary: Atualizar tarefa
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tarefa'
+      responses:
+        '200':
+          description: Tarefa atualizada
+    delete:
+      summary: Deletar tarefa
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Tarefa deletada
