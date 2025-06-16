@@ -27,7 +27,7 @@ app.use('/api/category', categoryRouter);
 app.use('/api/orderProduct', orderProduct);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-//http://localhost:3001/api-docs/
+//http://localhost:3001/api-docs/ 
 
 
 database.sync( { force: false })

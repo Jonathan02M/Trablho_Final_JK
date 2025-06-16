@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: API Completa de Gerenciamento
-  description: API com autenticação JWT para usuários, login, produtos, categorias, pedidos e itens de pedidos.
+  title: swegger Prova Final JK
+  description: swegger com JWT usuários, login, produtos, categorias, pedidos e itens pedidos.
   version: 1.2.0
 servers:
   - url: http://localhost:3001
@@ -83,13 +83,13 @@ paths:
               properties:
                 email:
                   type: string
-                senha:
+                password:
                   type: string
       responses:
         "200":
           description: Token JWT
  
-  /produtos:
+  /api/product:
     get:
       tags: [Produtos]
       summary: Listar produtos
@@ -107,7 +107,7 @@ paths:
       responses:
         "201":
           description: Produto criado
-  /produtos/{id}:
+  /api/product/{id}:
     put:
       tags: [Produtos]
       summary: Atualizar produto
@@ -136,7 +136,7 @@ paths:
         "204":
           description: Produto deletado
  
-  /categorias:
+  /api/category:
     get:
       tags: [Categorias]
       summary: Listar categorias
@@ -154,7 +154,7 @@ paths:
       responses:
         "201":
           description: Categoria criada
-  /categorias/{id}:
+  /api/category/{id}:
     put:
       tags: [Categorias]
       summary: Atualizar categoria
@@ -183,7 +183,7 @@ paths:
         "204":
           description: Categoria deletada
  
-  /pedidos:
+  /api/order:
     get:
       tags: [Pedidos]
       summary: Listar pedidos
@@ -203,7 +203,7 @@ paths:
       responses:
         "201":
           description: Pedido criado
-  /pedidos/{id}:
+  /api/order/{id}:
     put:
       tags: [Pedidos]
       summary: Atualizar pedido
@@ -234,7 +234,7 @@ paths:
         "204":
           description: Pedido deletado
  
-  /orderprodutos:
+  /api/orderProduct:
     get:
       tags: [Itens de Pedido]
       summary: Listar itens de pedidos
@@ -254,7 +254,7 @@ paths:
       responses:
         "201":
           description: Item adicionado
-  /orderprodutos/{id}:
+  /orderproduct/{id}:
     put:
       tags: [Itens de Pedido]
       summary: Atualizar item de pedido
@@ -297,11 +297,11 @@ components:
       properties:
         id:
           type: integer
-        nome:
+        name:
           type: string
         email:
           type: string
-        senha:
+        password:
           type: string
  
     Produto:
@@ -309,7 +309,7 @@ components:
       properties:
         id:
           type: integer
-        nome:
+        name:
           type: string
         preco:
           type: number
@@ -318,7 +318,7 @@ components:
       properties:
         id:
           type: integer
-        nome:
+        name:
           type: string
     Pedido:
       type: object
